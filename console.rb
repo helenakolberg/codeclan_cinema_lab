@@ -1,5 +1,6 @@
 require('pry-byebug')
 require_relative('models/customer')
+require_relative('models/film')
 
 customer1 = Customer.new({
     'name' => 'Tim',
@@ -19,6 +20,23 @@ customer3 = Customer.new({
 })
 customer3.save()
 
+film1 = Film.new({
+    'title' => 'Jaws',
+    'price' => '5'
+})
+film1.save()
+
+film2 = Film.new({
+    'title' => 'Jurassic Park',
+    'price' => '10'
+})
+film2.save()
+
+film3 = Film.new({
+    'title' => 'Titanic',
+    'price' => '15'
+})
+film3.save()
 
 
 
