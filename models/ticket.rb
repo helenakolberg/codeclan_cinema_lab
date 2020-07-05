@@ -9,14 +9,15 @@ class Ticket
         @id = options['id'].to_i if options['id']
         @customer_id = options['customer_id'].to_i
         @film_id = options['film_id'].to_i
+        @screening_id = options['screening_id']
     end
 
     def save()
         sql = "INSERT INTO tickets
-        (customer_id, film_id)
-        VALUES ($1, $2)
+        (customer_id, film_id, screening_id)
+        VALUES ($1, $2, $3)
         RETURNING id"
-        values = [@customer_id, @film_id]
+        values = [@customer_id, @film_id, @screening_id]
         result = SqlRunner.run(sql, values)
         @id = result[0]['id'].to_i
     end
@@ -40,9 +41,9 @@ class Ticket
 
     def update()
         sql = "UPDATE tickets SET
-        (customer_id, film_id) = ($1, $2)
-        WHERE id = $3"
-        values = [@customer_id, @film_id, @id]
+        (customer_id, film_id, screening_id) = ($1, $2, $3)
+        WHERE id = $4"
+        values = [@customer_id, @film_id, @screening_id, @id]
         SqlRunner.run(sql, values)
     end
 
@@ -50,12 +51,12 @@ class Ticket
         return data.map { |ticket| Ticket.new(ticket) }
     end
 
-    def self.customer_buys_ticket(customer, film)
+    def self.customer_buys_ticket(customer, film, screening)
         sql = "INSERT INTO tickets
-        (customer_id, film_id)
-        VALUES ($1, $2)
+        (customer_id, film_id, screening_id)
+        VALUES ($1, $2, $3)
         RETURNING id"
-        values = [customer.id, film.id]
+        values = [customer.id, film.id, screening.id]
         result = SqlRunner.run(sql, values)
         @id = result[0]['id'].to_i
         customer.subtract_price_from_funds
