@@ -44,12 +44,12 @@ class Ticket
         return data.map { |ticket| Ticket.new(ticket) }
     end
 
-    def customer_buys_ticket(customer)
+    def self.customer_buys_ticket(customer, film)
         sql = "INSERT INTO tickets
         (customer_id, film_id)
         VALUES ($1, $2)
         RETURNING id"
-        values = [@customer_id, @film_id]
+        values = [customer.id, film.id]
         result = SqlRunner.run(sql, values)
         @id = result[0]['id'].to_i
         customer.subtract_price_from_funds
