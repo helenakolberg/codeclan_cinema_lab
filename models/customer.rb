@@ -1,4 +1,5 @@
 require_relative('../db/sql_runner')
+require_relative('ticket')
 
 class Customer
 
@@ -54,7 +55,7 @@ class Customer
         return Film.map_items(result)
     end
 
-    def remaining_funds()
+    def subtract_price_from_funds()
         sql = "SELECT SUM(films.price) FROM customers
         INNER JOIN tickets ON
         tickets.customer_id = customers.id
@@ -63,8 +64,18 @@ class Customer
         WHERE customer_id = $1"
         values = [@id]
         price = SqlRunner.run(sql, values).first['sum'].to_i
-        remaining_funds = @funds.to_i - price
-        return remaining_funds
+        @funds -= price
+    end
+
+    def buy_ticket(ticket, film)
+        sql = "INSERT INTO tickets
+        (customer_id, film_id)
+        VALUES ($1, $2)
+        RETURNING id"
+        values = [@id, film.id]
+        result = SqlRunner.run(sql, values)
+        # ticket.id = result[0]['id'].to_i
+        subtract_price_from_funds
     end
 
     def number_of_tickets()
@@ -75,5 +86,6 @@ class Customer
         result = Ticket.map_items(tickets)
         return result.length
     end
+
 
 end
