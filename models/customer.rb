@@ -33,6 +33,12 @@ class Customer
         SqlRunner.run(sql, values)
     end
 
+    def self.find_all()
+        sql = "SELECT * FROM customers"
+        result = SqlRunner.run(sql)
+        return self.map_items(result)
+    end
+
     def update()
         sql = "UPDATE customers SET
         (name, funds) = ($1, $2)

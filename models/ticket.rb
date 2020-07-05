@@ -32,6 +32,12 @@ class Ticket
         SqlRunner.run(sql, values)
     end
 
+    def self.find_all()
+        sql = "SELECT * FROM tickets"
+        result = SqlRunner.run(sql)
+        return self.map_items(result)
+    end
+
     def update()
         sql = "UPDATE tickets SET
         (customer_id, film_id) = ($1, $2)
