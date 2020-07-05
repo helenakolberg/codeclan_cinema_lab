@@ -65,6 +65,14 @@ ticket3.delete()
 customer3.delete()
 film3.delete()
 
+film1.price = '15'
+film1.update()
+
+customer2.name = 'Laura'
+customer2.update()
+
+ticket2.film_id = film2.id
+ticket2.update()
 
 
 
