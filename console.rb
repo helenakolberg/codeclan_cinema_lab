@@ -27,8 +27,10 @@ film3.save()
 
 screening1 = Screening.new({'time' => '18:00'})
 screening2 = Screening.new({'time' => '20:00'})
+screening3 = Screening.new({'time' => '21:00'})
 screening1.save()
 screening2.save()
+screening3.save()
 
 ticket1 = Ticket.new({'customer_id' => customer1.id, 'film_id' => film1.id, 'screening_id' => screening1.id})
 ticket2 = Ticket.new({'customer_id' => customer2.id, 'film_id' => film1.id, 'screening_id' => screening1.id})
@@ -43,6 +45,7 @@ ticket4.save()
 ticket3.delete()
 customer3.delete()
 film3.delete()
+screening3.delete()
 
 film1.price = '15'
 film1.update()
