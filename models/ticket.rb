@@ -40,4 +40,8 @@ class Ticket
         SqlRunner.run(sql, values)
     end
 
+    def self.map_items(data)
+        return data.map { |ticket| Ticket.new(ticket) }
+    end
+
 end

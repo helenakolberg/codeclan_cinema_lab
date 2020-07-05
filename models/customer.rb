@@ -67,4 +67,13 @@ class Customer
         return remaining_funds
     end
 
+    def tickets()
+        sql = "SELECT * FROM tickets
+        WHERE customer_id = $1"
+        values = [@id]
+        tickets = SqlRunner.run(sql, values)
+        result = Ticket.map_items(tickets)
+        return result.length
+    end
+
 end
