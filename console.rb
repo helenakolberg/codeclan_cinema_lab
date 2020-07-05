@@ -56,6 +56,9 @@ customer2.update()
 ticket2.film_id = film2.id
 ticket2.update()
 
+screening1.time = '17:30'
+screening1.update()
+
 Ticket.customer_buys_ticket(customer4, film1, screening1)
 
 binding.pry

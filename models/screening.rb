@@ -39,4 +39,12 @@ class Screening
         SqlRunner.run(sql, values)
     end
 
+    def update()
+        sql = "UPDATE screenings SET
+        time = $1
+        WHERE id = $2"
+        values = [@time, @id]
+        SqlRunner.run(sql, values)
+    end
+
 end
