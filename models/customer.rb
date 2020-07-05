@@ -67,7 +67,7 @@ class Customer
         return remaining_funds
     end
 
-    def tickets()
+    def number_of_tickets()
         sql = "SELECT * FROM tickets
         WHERE customer_id = $1"
         values = [@id]
