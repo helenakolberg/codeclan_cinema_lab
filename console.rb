@@ -54,7 +54,7 @@ ticket2.film_id = film2.id
 ticket2.update()
 
 ticket5 = Ticket.new('customer_id' => customer4.id, 'film_id' => film1.id)
-customer4.buy_ticket(ticket5, film1)
+ticket5.customer_buys_ticket(customer4)
 
 binding.pry
 nil

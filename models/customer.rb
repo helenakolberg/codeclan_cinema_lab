@@ -67,16 +67,16 @@ class Customer
         @funds -= price
     end
 
-    def buy_ticket(ticket, film)
-        sql = "INSERT INTO tickets
-        (customer_id, film_id)
-        VALUES ($1, $2)
-        RETURNING id"
-        values = [@id, film.id]
-        result = SqlRunner.run(sql, values)
-        # ticket.id = result[0]['id'].to_i
-        subtract_price_from_funds
-    end
+    # def buy_ticket(ticket, film)
+    #     sql = "INSERT INTO tickets
+    #     (customer_id, film_id)
+    #     VALUES ($1, $2)
+    #     RETURNING id"
+    #     values = [@id, film.id]
+    #     result = SqlRunner.run(sql, values)
+    #     ticket.id = result[0]['id'].to_i
+    #     subtract_price_from_funds
+    # end
 
     def number_of_tickets()
         sql = "SELECT * FROM tickets
