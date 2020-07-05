@@ -1,3 +1,5 @@
+require_relative('../db/sql_runner')
+
 class Film
 
     attr_accessor :title, :price
@@ -17,6 +19,11 @@ class Film
         values = [@title, @price]
         result = SqlRunner.run(sql, values)
         @id = result[0]['id'].to_i
+    end
+
+    def self.delete_all()
+        sql = "DELETE FROM films"
+        SqlRunner.run(sql)
     end
 
 end
