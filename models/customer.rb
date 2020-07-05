@@ -54,4 +54,17 @@ class Customer
         return Film.map_items(result)
     end
 
+    def remaining_funds()
+        sql = "SELECT SUM(films.price) FROM customers
+        INNER JOIN tickets ON
+        tickets.customer_id = customers.id
+        INNER JOIN films ON
+        films.id = tickets.film_id
+        WHERE customer_id = $1"
+        values = [@id]
+        price = SqlRunner.run(sql, values).first['sum'].to_i
+        remaining_funds = @funds.to_i - price
+        return remaining_funds
+    end
+
 end
