@@ -1,3 +1,5 @@
+require_relative('../db/sql_runner')
+
 class Screening
 
     attr_accessor :time, :film_id

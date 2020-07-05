@@ -71,4 +71,14 @@ class Film
         return result.length
     end
 
+    def screenings()
+        sql = "SELECT screenings.* FROM screenings
+        INNER JOIN tickets ON
+        tickets.screening_id = screenings.id
+        WHERE tickets.film_id = $1"
+        values = [@id]
+        result = SqlRunner.run(sql, values)
+        return Screening.map_items(result)
+    end
+
 end
