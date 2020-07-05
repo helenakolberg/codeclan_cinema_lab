@@ -56,12 +56,13 @@ ticket2 = Ticket.new({
 ticket2.save()
 
 ticket3 = Ticket.new({
-    'customer_id' => customer2.id,
-    'film_id' => film2.id
+    'customer_id' => customer3.id,
+    'film_id' => film3.id
 })
 ticket3.save()
 
 ticket3.delete()
+customer3.delete()
 
 
 
