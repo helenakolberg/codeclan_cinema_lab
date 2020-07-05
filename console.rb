@@ -63,6 +63,7 @@ ticket3.save()
 
 ticket3.delete()
 customer3.delete()
+film3.delete()
 
 
 
